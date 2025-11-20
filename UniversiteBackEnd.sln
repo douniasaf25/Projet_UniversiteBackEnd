@@ -8,9 +8,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntryPoints", "EntryPoints"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{EA25BAA6-7D15-43F5-A5DB-5DC3E0482F47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversiteDomain", "UniversiteDomain\UniversiteDomain.csproj", "{459E3089-16A3-4529-BEE3-04C0AD666199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversiteDomainUnitTest", "UniversiteDomainUnitTest\UniversiteDomainUnitTest.csproj", "{A0F46E23-9F96-4F45-B927-44793F542031}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{459E3089-16A3-4529-BEE3-04C0AD666199} = {1E6741ED-83FC-4ED8-9EBC-9EE322625A10}
+		{A0F46E23-9F96-4F45-B927-44793F542031} = {EA25BAA6-7D15-43F5-A5DB-5DC3E0482F47}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{459E3089-16A3-4529-BEE3-04C0AD666199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{459E3089-16A3-4529-BEE3-04C0AD666199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{459E3089-16A3-4529-BEE3-04C0AD666199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{459E3089-16A3-4529-BEE3-04C0AD666199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0F46E23-9F96-4F45-B927-44793F542031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F46E23-9F96-4F45-B927-44793F542031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F46E23-9F96-4F45-B927-44793F542031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F46E23-9F96-4F45-B927-44793F542031}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
