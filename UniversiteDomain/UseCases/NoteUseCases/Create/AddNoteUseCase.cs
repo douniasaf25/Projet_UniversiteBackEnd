@@ -51,7 +51,7 @@ public class AddNoteUseCase(IRepositoryFactory repositoryFactory)
 
         // 5️⃣ Vérifier qu’il n’a pas déjà une note dans cette UE
         var noteExistante = await noteRepo.FindByConditionAsync(n =>
-            n.Etudiant.Id.Equals(idEtudiant) && n.Ue.Id.Equals(idUe));
+            n.IdEtudiant == idEtudiant && n.IdUe == idUe);
         if (noteExistante is { Count: > 0 })
             throw new DuplicateNoteException($"L’étudiant {idEtudiant} a déjà une note dans l’UE {idUe}");
     }

@@ -2,7 +2,9 @@ namespace UniversiteDomain.Entities;
 
 public class Note
 {
-    public long Id { get; set; }
+   
+    public long IdEtudiant { get; set; }
+    public long IdUe { get; set; }
     public float Valeur { get; set; }
 
     // ManyToOne : une note appartient à un étudiant
@@ -13,6 +15,6 @@ public class Note
 
     public override string ToString()
     {
-        return $"Note {Valeur}/20 pour {Etudiant?.Nom} {Etudiant?.Prenom} dans {Ue?.Intitule}";
+        return $"Note {Valeur}/20 pour Etudiant={IdEtudiant} dans Ue={IdUe}";
     }
 }

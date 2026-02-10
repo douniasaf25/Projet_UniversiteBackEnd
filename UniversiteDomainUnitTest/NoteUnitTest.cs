@@ -34,13 +34,18 @@ public class NoteUnitTest
         {
             Id = idEtudiant,
             NumEtud = "E123",
-            Nom = "Dupont",
+            Nom = "saf",
             Prenom = "Dounia",
-            Email = "dupont.dounia@upjv.fr",
+            Email = "saf.dounia@upjv.fr",
             ParcoursSuivi = parcours
         };
 
-        var noteFinale = new Note { Id = 100, Etudiant = etudiant, Ue = ue, Valeur = valeurNote };
+        var noteFinale = new Note
+        {
+            IdEtudiant = idEtudiant,
+            IdUe = idUe,
+            Valeur = valeurNote
+        };
 
         // 🔹 Mocks des repositories
         var mockEtudiantRepo = new Mock<IEtudiantRepository>();
@@ -79,9 +84,9 @@ public class NoteUnitTest
 
         // 🔹 Vérifications
         Assert.That(result, Is.Not.Null);
-        Assert.That(result.Id, Is.EqualTo(100));
-        Assert.That(result.Valeur, Is.EqualTo(15.5f));
-        Assert.That(result.Etudiant.Id, Is.EqualTo(idEtudiant));
-        Assert.That(result.Ue.Id, Is.EqualTo(idUe));
+        Assert.That(result.IdEtudiant, Is.EqualTo(idEtudiant));
+        Assert.That(result.IdUe, Is.EqualTo(idUe));
+        Assert.That(result.Valeur, Is.EqualTo(valeurNote));
+
     }
 }
