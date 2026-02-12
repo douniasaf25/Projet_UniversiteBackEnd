@@ -14,6 +14,11 @@ namespace UniversiteDomain.UseCases.ParcoursUseCases.Create
         {
             parcoursRepository = repositoryFactory.ParcoursRepository();
         }
+        public bool IsAuthorized(string role)
+        {
+            return Roles.Responsable.Equals(role)
+                   || Roles.Scolarite.Equals(role);
+        }
         public async Task<Parcours> ExecuteAsync(string nomParcours, int anneeFormation)
         {
             var parcours = new Parcours

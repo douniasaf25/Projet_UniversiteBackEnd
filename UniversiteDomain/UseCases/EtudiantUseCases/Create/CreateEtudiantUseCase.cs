@@ -7,6 +7,12 @@ namespace UniversiteDomain.UseCases.EtudiantUseCases.Create;
 
 public class CreateEtudiantUseCase(IEtudiantRepository etudiantRepository)
 {
+    // AJOUT DE LA MÉTHODE IsAuthorized
+    public bool IsAuthorized(string role)
+    {
+        // Seuls Responsable et Scolarité peuvent créer des étudiants
+        return role.Equals(Roles.Responsable) || role.Equals(Roles.Scolarite);
+    }
     public async Task<Etudiant> ExecuteAsync(string numEtud, string nom, string prenom, string email)
     {
         var etudiant = new Etudiant{NumEtud = numEtud, Nom = nom, Prenom = prenom, Email = email};

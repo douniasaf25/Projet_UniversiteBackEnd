@@ -13,5 +13,6 @@ public interface IEtudiantRepository : IRepository<Etudiant>
     Task<Etudiant?> FindAsync(params object[] keyValues);
     Task<List<Etudiant>> FindByConditionAsync(Expression<Func<Etudiant, bool>> condition);
     Task<List<Etudiant>> FindAllAsync();
+    Task<Etudiant?> FindEtudiantCompletAsync(long idEtudiant);
     Task SaveChangesAsync();
 }

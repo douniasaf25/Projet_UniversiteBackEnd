@@ -16,6 +16,7 @@ public class ParcoursRepository : Repository<Parcours>, IParcoursRepository
         var etudiant = await Context.Etudiants!.FindAsync(idEtudiant)
             ?? throw new Exception("Étudiant introuvable");
 
+        etudiant.ParcoursSuivi = parcours;
         parcours.Inscrits!.Add(etudiant);
         await Context.SaveChangesAsync();
         return parcours;

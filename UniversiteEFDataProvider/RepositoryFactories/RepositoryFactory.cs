@@ -1,16 +1,20 @@
+using Microsoft.AspNetCore.Identity;
 using UniversiteDomain.DataAdapters;
 using UniversiteDomain.DataAdapters.DataAdaptersFactory;
 using UniversiteEFDataProvider.Data;
+using UniversiteEFDataProvider.Entities;
 using UniversiteEFDataProvider.Repositories;
 
 namespace UniversiteEFDataProvider.RepositoryFactories;
 
-public class RepositoryFactory (UniversiteDbContext context): IRepositoryFactory
+public class RepositoryFactory(UniversiteDbContext context, RoleManager<UniversiteRole> roleManager, UserManager<UniversiteUser> userManager): IRepositoryFactory
 {
     private IParcoursRepository? _parcours;
     private IEtudiantRepository? _etudiants;
     private IUeRepository? _ues;
     private INoteRepository? _notes;
+    private IUniversiteRoleRepository? _universiteRoles;
+    private IUniversiteUserRepository? _universiteUsers;
     
     public IParcoursRepository ParcoursRepository()
     {
@@ -48,7 +52,15 @@ public class RepositoryFactory (UniversiteDbContext context): IRepositoryFactory
         return _notes;
 
     }
-       
+    public IUniversiteRoleRepository UniversiteRoleRepository()
+    {
+        return _universiteRoles ??= new UniversiteRoleRepository(context, roleManager);
+    }
+
+    public IUniversiteUserRepository UniversiteUserRepository()
+    {
+        return _universiteUsers ??= new UniversiteUserRepository(context, userManager,roleManager);
+    }
     public async Task SaveChangesAsync()
     {
         context.SaveChangesAsync().Wait();

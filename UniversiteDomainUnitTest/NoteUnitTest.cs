@@ -5,7 +5,7 @@ using UniversiteDomain.DataAdapters.DataAdaptersFactory;
 using UniversiteDomain.Entities;
 using UniversiteDomain.UseCases.NoteUseCases.Create;
 
-namespace UniversiteDomainUnitTests;
+namespace UniversiteDomainUnitTest;
 
 public class NoteUnitTest
 {

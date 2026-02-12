@@ -15,6 +15,11 @@ public class AddEtudiantDansParcoursUseCase(IRepositoryFactory repositoryFactory
           ArgumentNullException.ThrowIfNull(etudiant);
           return await ExecuteAsync(parcours.Id, etudiant.Id); 
       }  
+      public bool IsAuthorized(string role)
+      {
+          return Roles.Responsable.Equals(role)
+                 || Roles.Scolarite.Equals(role);
+      }
       public async Task<Parcours> ExecuteAsync(long idParcours, long idEtudiant)
       {
           await CheckBusinessRules(idParcours, idEtudiant); 

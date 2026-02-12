@@ -7,6 +7,11 @@ namespace UniversiteDomain.UseCases.ParcoursUseCases.UeDansParcours;
 
 public class AddUeDansParcoursUseCase(IRepositoryFactory repositoryFactory)
 {
+    public bool IsAuthorized(string role)
+    {
+        return Roles.Responsable.Equals(role)
+               || Roles.Scolarite.Equals(role);
+    }
     // Rajout d'une Ue dans un parcours
       public async Task<Parcours> ExecuteAsync(Parcours parcours, Ue ue)
       {
@@ -47,7 +52,7 @@ public class AddUeDansParcoursUseCase(IRepositoryFactory repositoryFactory)
         // Vérifions tout d'abord que nous sommes bien connectés aux datasources
         ArgumentNullException.ThrowIfNull(repositoryFactory);
         ArgumentNullException.ThrowIfNull(repositoryFactory.UeRepository());
-        ArgumentNullException.ThrowIfNull(repositoryFactory.UeRepository());
+        ArgumentNullException.ThrowIfNull(repositoryFactory.ParcoursRepository());
         
         // On recherche l'ue
         List<Ue> ue = await repositoryFactory.UeRepository().FindByConditionAsync(e=>e.Id.Equals(idUe));;

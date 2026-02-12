@@ -24,4 +24,16 @@ public class EtudiantDto
     {
         return new Etudiant {Id = this.Id, NumEtud = this.NumEtud, Nom = this.Nom, Prenom = this.Prenom, Email = this.Email};
     }
+    
+    public static List<EtudiantDto> ToDtos(List<Etudiant> etudiants)
+    {
+        List<EtudiantDto> dtos = new();
+
+        foreach (var etudiant in etudiants)
+        {
+            dtos.Add(new EtudiantDto().ToDto(etudiant));
+        }
+
+        return dtos;
+    }
 }
