@@ -17,7 +17,7 @@ public class NoteUnitTest
     [Test]
     public async Task AddNoteUseCase_Success()
     {
-        // 🔹 Données simulées
+        // Données simulées
         long idEtudiant = 1;
         long idUe = 10;
         float valeurNote = 15.5f;
@@ -47,7 +47,7 @@ public class NoteUnitTest
             Valeur = valeurNote
         };
 
-        // 🔹 Mocks des repositories
+        //  Mocks des repositories
         var mockEtudiantRepo = new Mock<IEtudiantRepository>();
         var mockUeRepo = new Mock<IUeRepository>();
         var mockNoteRepo = new Mock<INoteRepository>();
@@ -72,17 +72,17 @@ public class NoteUnitTest
             .Setup(repo => repo.AddNoteAsync(idEtudiant, idUe, valeurNote))
             .ReturnsAsync(noteFinale);
 
-        // 🔹 Mock de la factory
+        //  Mock de la factory
         var mockFactory = new Mock<IRepositoryFactory>();
         mockFactory.Setup(f => f.EtudiantRepository()).Returns(mockEtudiantRepo.Object);
         mockFactory.Setup(f => f.UeRepository()).Returns(mockUeRepo.Object);
         mockFactory.Setup(f => f.NoteRepository()).Returns(mockNoteRepo.Object);
 
-        // 🔹 Exécution du Use Case
+        //  Exécution du Use Case
         var useCase = new AddNoteUseCase(mockFactory.Object);
         var result = await useCase.ExecuteAsync(idEtudiant, idUe, valeurNote);
 
-        // 🔹 Vérifications
+        //  Vérifications
         Assert.That(result, Is.Not.Null);
         Assert.That(result.IdEtudiant, Is.EqualTo(idEtudiant));
         Assert.That(result.IdUe, Is.EqualTo(idUe));

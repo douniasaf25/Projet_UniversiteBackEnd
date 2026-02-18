@@ -50,7 +50,7 @@ namespace UniversiteDomain.UseCases.ParcoursUseCases.Create
             if (existe is { Count: > 0 })
                 throw new ($"{parcours.NomParcours} - ce nom de parcours existe déjà");
 
-            // Vérification du format de l’année de formation (ex: 2024/2025)
+            // Vérification du format de l’année de formation (exemple: 2024/2025)
             if (!CheckAnneeFormation.IsValidAnnee(parcours.AnneeFormation))
                 throw new InvalidAnneeFormationException($"{parcours.AnneeFormation} - année de formation invalide");
 

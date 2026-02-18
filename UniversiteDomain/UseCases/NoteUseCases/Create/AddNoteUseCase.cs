@@ -36,9 +36,9 @@ public class AddNoteUseCase(IRepositoryFactory repositoryFactory)
         ArgumentNullException.ThrowIfNull(ueRepo);
         ArgumentNullException.ThrowIfNull(noteRepo);
 
-        //  Vérifier que l'étudiant existe
-        var etudiant = await etudiantRepo.FindByConditionAsync(e => e.Id.Equals(idEtudiant));
-        if (etudiant is { Count: 0 })
+        //  Vérifier que l'étudiant existe + charger son parcours + ses UEs
+        var etudiant = await etudiantRepo.FindEtudiantCompletAsync(idEtudiant);
+        if (etudiant == null)
             throw new EtudiantNotFoundException($"Étudiant {idEtudiant} introuvable");
 
         //  Vérifier que l'UE existe
@@ -51,10 +51,11 @@ public class AddNoteUseCase(IRepositoryFactory repositoryFactory)
             throw new InvalidNoteValueException($"La note {valeur} n’est pas valide (doit être comprise entre 0 et 20)");
 
         // Vérifier que l'étudiant suit bien cette UE dans son parcours
-        var parcoursEtudiant = etudiant[0].ParcoursSuivi;
-        if (parcoursEtudiant == null || parcoursEtudiant.UesEnseignees?.Find(u => u.Id == idUe) == null)
-            throw new InvalidNoteParcoursException($"L’étudiant {idEtudiant} n’est pas inscrit dans le parcours contenant l’UE {idUe}");
-
+        var parcoursEtudiant = etudiant.ParcoursSuivi;
+        if (parcoursEtudiant?.UesEnseignees?.Any(u => u.Id == idUe) != true)
+            throw new InvalidNoteParcoursException(
+                $"L’étudiant {idEtudiant} n’est pas inscrit dans le parcours contenant l’UE {idUe}"
+            );
         // Vérifier qu’il n’a pas déjà une note dans cette UE
         var noteExistante = await noteRepo.FindByConditionAsync(n =>
             n.IdEtudiant == idEtudiant && n.IdUe == idUe);

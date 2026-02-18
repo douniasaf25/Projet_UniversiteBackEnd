@@ -20,4 +20,10 @@ public class NoteRepository(UniversiteDbContext context)
         await Context.SaveChangesAsync();
         return note;
     }
+    
+    public async Task<Note?> FindAsync(long idEtudiant, long idUe)
+    {
+        return await Context.Notes!.FindAsync(idEtudiant, idUe);
+    }
+
 }

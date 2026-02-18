@@ -3,7 +3,7 @@ namespace UniversiteDomain.Util;
 public class CheckAnneeFormation
 {
     /// <summary>
-    /// Vérifie si l'année de formation est valide (ex: 2024/2025)
+    /// Vérifie si l'année de formation est valide (exemple : 2024/2025)
     /// </summary>
     public static bool IsValidAnnee(int anneeFormation)
     {

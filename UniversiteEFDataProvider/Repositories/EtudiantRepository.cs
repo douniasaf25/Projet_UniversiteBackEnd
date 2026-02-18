@@ -25,9 +25,18 @@ public class EtudiantRepository(UniversiteDbContext context) : Repository<Etudia
     {
         return await Context.Etudiants
             .Include(e => e.ParcoursSuivi)
+            .ThenInclude(p => p.UesEnseignees)
             .Include(e => e.NotesObtenues)
             .ThenInclude(n => n.Ue)
             .FirstOrDefaultAsync(e => e.Id == idEtudiant);
+    }
+    
+    public async Task<List<Etudiant>> FindEtudiantsByUeAsync(long idUe)
+    {
+        return await Context.Etudiants!
+            .Where(e => e.ParcoursSuivi != null
+                        && e.ParcoursSuivi.UesEnseignees!.Any(u => u.Id == idUe))
+            .ToListAsync();
     }
 
 }
